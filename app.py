@@ -31,12 +31,13 @@ canvas = st_canvas(
     drawing_mode="freedraw"
 )
 
-if canvas.image_data is not None:
+predict_button = st.button("Predict")
+
+if predict_button:
     # Preprocess the canvas drawing and make a prediction
     preprocessed_image = preprocess_image(canvas.image_data)
     prediction = model.predict(preprocessed_image)
     predicted_class = np.argmax(prediction)
 
-    # Display the canvas drawing and the prediction result
-    st.image(canvas.image_data, caption='Your Drawing', use_column_width=True)
+    # Display the prediction result
     st.write(f"Predicted Digit: {predicted_class}")
